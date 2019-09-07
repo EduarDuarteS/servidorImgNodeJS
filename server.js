@@ -1,6 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser')
 const fs = require('fs');
+//variables nuevas ssl
+var https = require('https');
+var http = require('http');
 
 const app = express();
 
@@ -32,4 +35,10 @@ var server=app.listen(port2,function(){
     console.log('Servidor web iniciado');
 });
 
-app.listen(port, () => console.log('server ready'));
+// app.listen(port, () => console.log('server ready'));
+var options = {
+  key: fs.readFileSync('key.txt'),
+  cert: fs.readFileSync('crt.txt')
+};
+// Create an HTTPS service identical to the HTTP service.
+https.createServer(options, app).listen(port);
