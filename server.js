@@ -17,6 +17,10 @@ app.use(function(req, res, next) {
     next();
 });
 
+app.get('/', function (req, res) {
+  res.send('hello world')
+});
+
 app.post('/upload', (req, res) =>{
     const file = req.body.file;
     const name = req.body.name;
@@ -37,8 +41,8 @@ var server=app.listen(port2,function(){
 
 // app.listen(port, () => console.log('server ready'));
 var options = {
-  key: fs.readFileSync('key.txt'),
-  cert: fs.readFileSync('crt.txt')
+  key: fs.readFileSync('keys/key.txt'),
+  cert: fs.readFileSync('keys/crt.txt')
 };
 // Create an HTTPS service identical to the HTTP service.
 https.createServer(options, app).listen(port);
